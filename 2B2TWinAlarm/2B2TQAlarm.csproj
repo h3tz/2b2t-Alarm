@@ -32,7 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>icons8-grand-canyon-16.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\icons8-grand-canyon-16.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -85,9 +85,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\application_go.png" />
-    <None Include="textfield_delete.png" />
-    <None Include="control_play_blue.png" />
-    <Content Include="icons8-grand-canyon-16.ico" />
+    <None Include="Resources\textfield_delete.png" />
+    <None Include="Resources\control_play_blue.png" />
+    <Content Include="Resources\icons8-grand-canyon-16.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
