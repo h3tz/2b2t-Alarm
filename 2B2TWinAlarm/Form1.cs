@@ -188,8 +188,9 @@ namespace _2B2TWinAlarm
         private string getPotentialFinaTime()
         {
             int median = medianTime();
+            this.medianCounter = medianCounter + 1;
 
-            if (medianCounter >= 5)
+            if (this.medianCounter >= 5)
             {
                 int totalSeconds = this.currentPos * median;
 
@@ -201,6 +202,8 @@ namespace _2B2TWinAlarm
             {
                 return " will be calculated";
             }
+
+           
         }
 
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
