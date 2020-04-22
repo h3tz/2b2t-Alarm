@@ -9,6 +9,11 @@ Features:
  - Shows the 2b2t queue position
  - Plays alarm when a specific queue position is reached
  - Alarm 
+ 
+ Planed Features:
+=========
+ - Host prometheus client to feed Grafana
+ - Notify your smartphone
 
 Alarm channels:
 =========
