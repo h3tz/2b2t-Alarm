@@ -39,7 +39,8 @@ namespace _2B2TWinAlarm
             this.Text = "2B2TAlarm V" + System.Windows.Forms.Application.ProductVersion;
             myWatch.Start();
 
-            var server = new MetricServer(hostname: "localhost", port: 9000);
+            
+            var server = new MetricServer(hostname: "localhost", port: 1234);
             server.Start();
 
             try
