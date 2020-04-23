@@ -25,7 +25,7 @@ Usage
 ### Windows
  1. Unpack the archieve wherever you want
  2. Compile the project
- 3. Create a directory nex to 2B2t Queue Alarm.exe named "ressources" and put in any *.wav files you want to select as alarm later
+ 3. Copy *.wavs to resource folder used as alarms
  4. Double click 2B2t Queue Alarm.exe
 
 ### Linux/Mac OS X
