@@ -8,6 +8,7 @@ Features:
 =========
  - Shows the 2b2t queue position
  - Plays alarm when a specific queue position is reached
+ - Prometheus client to feed Grafana
  - Alarm 
  
  Planed Features:
