@@ -11,9 +11,8 @@ Features:
  - Prometheus client (to feed Grafana for example)
  
  Planed Features:
-=========
- - Host prometheus client to feed Grafana
- - Notify your smartphone
+ =========
+ - Notification to smartphone
 
 Alarm channels:
 =========
