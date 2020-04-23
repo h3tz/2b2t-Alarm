@@ -280,12 +280,14 @@ namespace _2B2TWinAlarm
         {
             this.numericUpDown1.Text = Settings.Default.queuePos;
             this.checkBox1.Checked = Settings.Default.alarmcheckBox;
+            this.checkBoxPrometheus.Checked = Settings.Default.prometheusCheckBox;
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             Settings.Default.queuePos = this.numericUpDown1.Text;
             Settings.Default.alarmcheckBox = this.checkBox1.Checked;
+            Settings.Default.prometheusCheckBox = this.checkBoxPrometheus.Checked;
             Settings.Default.Save();
         }
     }

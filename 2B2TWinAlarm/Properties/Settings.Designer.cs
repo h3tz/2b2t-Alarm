@@ -46,5 +46,17 @@ namespace _2B2TQueAlarm.Properties {
                 this["alarmcheckBox"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool prometheusCheckBox {
+            get {
+                return ((bool)(this["prometheusCheckBox"]));
+            }
+            set {
+                this["prometheusCheckBox"] = value;
+            }
+        }
     }
 }
