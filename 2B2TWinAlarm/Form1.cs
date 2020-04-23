@@ -6,6 +6,7 @@
  */
 
 using _2B2TQueAlarm.Properties;
+using Prometheus;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -29,11 +30,17 @@ namespace _2B2TWinAlarm
         private int medianCounter = 0;
         public int currentPos = 0;
 
+        //private Gauge queuePos = Metrics.CreateGauge("2b2tQPos", "Position_in_2b2t_queue");
+        private Gauge queuePos = Metrics.CreateGauge("twoBtwoT_queue_pos", "Position_in_2b2t_queue");
+
         public Form1()
         {
             InitializeComponent();
             this.Text = "2B2TAlarm V" + System.Windows.Forms.Application.ProductVersion;
             myWatch.Start();
+
+            var server = new MetricServer(hostname: "localhost", port: 9000);
+            server.Start();
 
             try
             {
@@ -140,12 +147,21 @@ namespace _2B2TWinAlarm
                                 playAlarm();
                             }
                         }
+
+                        if(checkBoxPrometheus.Checked == true)
+                        {
+                            queuePos.Set(double.Parse(curPos));
+                        }
                     }
                 }
                 else
                 {
                     AppendText(this.richTextBox_log, "Info: " + " Your are not trying to connect to 2b2t.org minecraft server", Color.Red);
                 }
+
+
+
+
             }
             catch (Exception ex)
             {
