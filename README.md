@@ -8,8 +8,7 @@ Features:
 =========
  - Shows the 2b2t queue position
  - Plays alarm when a specific queue position is reached
- - Prometheus client to feed Grafana
- - Alarm 
+ - Prometheus client (to feed Grafana for example)
  
  Planed Features:
 =========
@@ -31,7 +30,7 @@ Usage
 
 ### Prometheus
   This only works when "expose" prometheus client AND a prometheus server subscribe to localhost:1234
-  [Prometheus example](https://github.com/h3tz/2b2t-Alarm/blob/master/2b2tPrometheus.PNG)
+  [Prometheus Grafana example](https://github.com/h3tz/2b2t-Alarm/blob/master/2b2tPrometheus.PNG)
 
 ### Linux/Mac OS X
 Can not be used with Linux
