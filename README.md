@@ -31,7 +31,7 @@ Usage
 
 ### Prometheus
   This only works when "expose" prometheus client AND a prometheus server subscribe to localhost:1234
-  ![](https://github.com/h3tz/2b2t-Alarm/2b2tPrometheus.PNG?raw=true)
+  [Show Preometheus example](https://github.com/h3tz/2b2t-Alarm/2b2tPrometheus.PNG?raw=true)
 
 ### Linux/Mac OS X
 Can not be used with Linux
