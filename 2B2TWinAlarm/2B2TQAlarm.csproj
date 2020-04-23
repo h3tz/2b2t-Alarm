@@ -87,6 +87,8 @@
     <None Include="Resources\application_go.png" />
     <None Include="Resources\textfield_delete.png" />
     <None Include="Resources\control_play_blue.png" />
+    <None Include="bin\Debug\ressources\Alarm01.wav" />
+    <Content Include="Resources\Alarm01.wav" />
     <Content Include="Resources\icons8-grand-canyon-16.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

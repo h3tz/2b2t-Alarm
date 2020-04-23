@@ -5,6 +5,7 @@
  * @see {@link https://github.com/h3tz/2b2t-Alarm|Website }
  */
 
+using _2B2TQueAlarm.Properties;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -34,17 +35,45 @@ namespace _2B2TWinAlarm
             this.Text = "2B2TAlarm V" + System.Windows.Forms.Application.ProductVersion;
             myWatch.Start();
 
-            //init alarm field
-            allAlarms = Directory.GetFiles(Directory.GetCurrentDirectory()+"/ressources").ToList();
-
-            foreach (string alarmitem in allAlarms)
+            try
             {
-                this.comboBox_alarm.Items.Add(Path.GetFileName(alarmitem));
-            }
-            this.comboBox_alarm.SelectedIndex = 0;
+                //init alarm field
+                string directoryTocreate = Directory.GetCurrentDirectory() + "/resources";
+                if (!Directory.Exists(directoryTocreate))
+                {
+                    Directory.CreateDirectory(directoryTocreate);
+                }
 
-            string pathToAppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            this.pahtToLogFileD = pathToAppData + mLogFilePath;
+                allAlarms = Directory.GetFiles(directoryTocreate,"*.wav").ToList();
+
+                if (allAlarms.Count != 0)
+                {
+                    foreach (string alarmitem in allAlarms)
+                    {
+                        this.comboBox_alarm.Items.Add(Path.GetFileName(alarmitem));
+                    }
+                    this.comboBox_alarm.SelectedIndex = 0;
+
+                    string pathToAppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                    this.pahtToLogFileD = pathToAppData + mLogFilePath;
+                }
+                else
+                {
+                    throw new System.ArgumentException("The ressource folder next to *.exe does not contain *.wav. Please copy at least one *.wav into the resource directory.");
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+                DialogResult result;
+
+                // Displays the MessageBox.
+                result = MessageBox.Show(ex.Message, "2b2t Alarm startup error", buttons);
+                //if (result == System.Windows.Forms.DialogResult.Yes)
+                //{
+                this.Close();
+                //}
+            }
         }
 
         /// <summary>
@@ -89,7 +118,6 @@ namespace _2B2TWinAlarm
         {
             try
             {
-
                 string curPos = e.Result.ToString();
                 this.label1.Text = curPos;
                 this.label1.Update();
@@ -201,9 +229,7 @@ namespace _2B2TWinAlarm
             else
             {
                 return " will be calculated";
-            }
-
-           
+            }           
         }
 
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -231,6 +257,19 @@ namespace _2B2TWinAlarm
         private void toolStripButtonOpenMLog_Click(object sender, EventArgs e)
         {
             Process.Start("notepad.exe", pahtToLogFileD);
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            this.numericUpDown1.Text = Settings.Default.queuePos;
+            this.checkBox1.Checked = Settings.Default.alarmcheckBox;
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Settings.Default.queuePos = this.numericUpDown1.Text;
+            Settings.Default.alarmcheckBox = this.checkBox1.Checked;
+            Settings.Default.Save();
         }
     }
 }
