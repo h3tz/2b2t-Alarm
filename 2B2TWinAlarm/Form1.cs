@@ -18,13 +18,20 @@ using System.Windows.Forms;
 
 namespace _2B2TWinAlarm
 {
+    public enum toolState
+    {
+        fetchingPos,
+        b2tServerRestarte,
+        notFechingPos
+    }
+
     public partial class Form1 : Form
     {
         private string pos = string.Empty;
         private Stopwatch myWatch = new Stopwatch();
         private List<TimeSpan> lastElaps = new List<TimeSpan>();
         private List<string> allAlarms = new List<string>();
-        private int defaultPos = 99999;
+        private int defaultPos = 0;
         private string mLogFilePath = @"\.minecraft\logs\latest.log";
         private string pahtToLogFileD = string.Empty;
         private int medianCounter = 0;
@@ -33,16 +40,14 @@ namespace _2B2TWinAlarm
         //private Gauge queuePos = Metrics.CreateGauge("2b2tQPos", "Position_in_2b2t_queue");
         private Gauge queuePos = Metrics.CreateGauge("twoBtwoT_queue_pos", "Position_in_2b2t_queue");
 
+
         public Form1()
         {
             InitializeComponent();
             this.Text = "2B2TAlarm V" + System.Windows.Forms.Application.ProductVersion;
-            myWatch.Start();
-
-            
-            var server = new MetricServer(hostname: "localhost", port: 1234);
-            server.Start();
-
+            this.buttonQuality.BackColor = Color.OrangeRed;
+            myWatch.Start();                        
+           
             try
             {
                 //init alarm field
@@ -121,7 +126,8 @@ namespace _2B2TWinAlarm
         /// <summary>
         /// Runworker completed to update ui
         /// </summary>
-        string lastPos = string.Empty;
+        string lastPos = "0";
+        bool prometheusServerRunning = false;
         private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
             try
@@ -131,27 +137,42 @@ namespace _2B2TWinAlarm
                 this.label1.Update();
                 toolStripStatusLabel1.Text = "Update: " + DateTime.Now.ToLongTimeString();
 
+                MetricServer server;
+                if ((checkBoxPrometheus.Checked == true) && (prometheusServerRunning == false))
+                {
+                    server = new MetricServer(hostname: "localhost", port: 1234);
+                    server.Start();
+                    prometheusServerRunning = true;
+                }
+
                 if (curPos != defaultPos.ToString())
                 {
                     if (lastPos != curPos)
                     {
-                        lastElaps.Add(myWatch.Elapsed);
-                        myWatch.Stop();
-                        lastPos = curPos;
-                        AppendText(this.richTextBox_log, "Update: " + DateTime.Now.ToShortTimeString() + "|Pos: " + curPos + "|took: " + lastElaps[lastElaps.Count - 1].TotalSeconds.ToString() + " - sec from pos: " + ((int.Parse(curPos)) + 1).ToString() + "|Median: " + medianTime().ToString() + "|estimated connection time: " + getPotentialFinaTime().ToString() + " \n", Color.Black);
-                        myWatch.Restart();
-
-                        if (int.Parse(curPos) <= numericUpDown1.Value)
+                        if (myWatch.Elapsed.TotalSeconds > 2)
                         {
-                            if (checkBox1.Checked == true)
+                            lastElaps.Add(myWatch.Elapsed);
+                            myWatch.Stop();
+                            lastPos = curPos;
+                            
+                            AppendText(this.richTextBox_log, "Update: " + DateTime.Now.ToShortTimeString() + "|Pos: " + curPos + "|took: " + lastElaps[lastElaps.Count - 1].TotalSeconds.ToString() + " - sec from pos: " + ((int.Parse(curPos)) + 1).ToString() + "|Median: " + medianTime().ToString() + "|estimated connection time: " + getPotentialFinaTime("MM/dd/yyyy HH:mm").ToString() + " \n", Color.Black);
+                            myWatch.Restart();
+                            this.buttonQuality.BackColor = getQualityOfPrediction();
+                            this.labelTimeToConnect.Text = getPotentialFinaTime("HH:mm");
+                            this.labelDateToConnect.Text = getPotentialFinaTime("MM/dd/yyyy");
+
+                            if (int.Parse(curPos) <= numericUpDown1.Value)
                             {
-                                playAlarm();
+                                if (checkBox1.Checked == true)
+                                {
+                                    playAlarm();
+                                }
                             }
-                        }
 
-                        if(checkBoxPrometheus.Checked == true)
-                        {
-                            queuePos.Set(double.Parse(curPos));
+                            if (checkBoxPrometheus.Checked == true)
+                            {
+                                queuePos.Set(double.Parse(curPos));
+                            }
                         }
                     }
                 }
@@ -159,15 +180,62 @@ namespace _2B2TWinAlarm
                 {
                     AppendText(this.richTextBox_log, "Info: " + " Your are not trying to connect to 2b2t.org minecraft server", Color.Red);
                 }
-
-
-
-
             }
             catch (Exception ex)
             {
                 AppendText(this.richTextBox_log, "ERROR: " + ex.Message, Color.Red);
             }
+        }
+
+        private int lastMedian = 0;
+        private Color getQualityOfPrediction()
+        {
+            double allSpanTimeSum = 0;
+            Color retcol = Color.Red;
+
+            try
+            {
+                if (currentPos > 5)
+                {
+                    if (lastElaps.Count > 5)
+                    {
+                        double curentMedian = medianTime();
+                        double lastTook = (int)(lastElaps[lastElaps.Count - 1].TotalSeconds);
+                        double delta = lastTook / curentMedian;
+
+                        if (delta > 1.5)
+                        {
+                            retcol = Color.Red;
+                        }
+                        else if ((delta > 1.1) && ((delta <= 1.5)))
+                        {
+                            retcol = Color.Yellow;
+                        }
+                        else if (delta <= 1.1)
+                        {
+                            retcol = Color.Green;
+                        }
+                        else
+                        {
+                            retcol = Color.Red;
+                        }
+                    }
+                    else
+                    {
+                        retcol = Color.Red;
+                    }
+                }
+                else
+                {
+                    retcol = Color.Green;
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return Color.Green;
         }
 
         /// <summary>
@@ -189,11 +257,19 @@ namespace _2B2TWinAlarm
             {
                 lastLine = currentLine;
             }
-
             if (lastLine.Contains("Position in queue"))
             {
                 String[] split = lastLine.Split(':');
                 quePos = int.Parse(split[split.Length - 1]);
+                setToolState(toolState.fetchingPos);
+            }
+            else if (lastLine.Contains("restarting"))
+            {
+                setToolState(toolState.b2tServerRestarte);
+            }
+            else
+            {
+                setToolState(toolState.notFechingPos);
             }
             this.currentPos = quePos;
             return quePos;
@@ -215,9 +291,9 @@ namespace _2B2TWinAlarm
             box.SelectionColor = box.ForeColor;
         }
 
-        private int medianTime()
+        private double medianTime()
         {
-            int midTime = 0;
+            double midTime = 0;
             foreach (TimeSpan curTimeSpan in lastElaps)
             {
                 midTime = (int) curTimeSpan.TotalSeconds + midTime;
@@ -230,22 +306,21 @@ namespace _2B2TWinAlarm
         /// Get a estimated time when queue position 0 is reached
         /// </summary>
         /// <returns>Datetime as short</returns>
-        private string getPotentialFinaTime()
+        private string getPotentialFinaTime(string pattern)
         {
-            int median = medianTime();
-            this.medianCounter = medianCounter + 1;
+            double median = medianTime();
 
-            if (this.medianCounter >= 5)
+            if (lastElaps.Count() >= 5)
             {
-                int totalSeconds = this.currentPos * median;
-
+                double totalSeconds = this.currentPos * median;
                 TimeSpan result = TimeSpan.FromSeconds(totalSeconds);
                 DateTime time = DateTime.Now;
-                return time.AddSeconds(result.TotalSeconds).ToShortTimeString();
-            }
+                return time.AddSeconds(result.TotalSeconds).ToString(pattern);
+            }          
             else
             {
-                return " will be calculated";
+                this.buttonQuality.BackColor = Color.OrangeRed;
+                return " -";
             }           
         }
 
@@ -281,6 +356,8 @@ namespace _2B2TWinAlarm
             this.numericUpDown1.Text = Settings.Default.queuePos;
             this.checkBox1.Checked = Settings.Default.alarmcheckBox;
             this.checkBoxPrometheus.Checked = Settings.Default.prometheusCheckBox;
+
+            setToolState(toolState.notFechingPos);
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -289,6 +366,32 @@ namespace _2B2TWinAlarm
             Settings.Default.alarmcheckBox = this.checkBox1.Checked;
             Settings.Default.prometheusCheckBox = this.checkBoxPrometheus.Checked;
             Settings.Default.Save();
+        }
+
+        private void setToolState(toolState stateToSet)
+        {
+            string stateDesc = string.Empty;
+
+            switch (stateToSet)
+            {
+                case toolState.fetchingPos:
+                    {
+                        stateDesc = "Fetching queue position";
+                    }
+                    break;
+                case toolState.b2tServerRestarte:
+                    {
+                        stateDesc = "2b2t server restarted. Please reconnect";
+                    }
+                    break;
+                case toolState.notFechingPos:
+                    {
+                        stateDesc = "doing nothing";
+                    }
+                    break;
+            }
+
+            this.toolStripStatusLabelToolState.Text = stateDesc;
         }
     }
 }
