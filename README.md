@@ -14,10 +14,6 @@ Features:
  =========
  - Notification to smartphone
 
-Alarm channels:
-=========
- - Windows sound
-
 Usage
 =====
 
