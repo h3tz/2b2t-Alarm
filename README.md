@@ -18,6 +18,11 @@ Usage
 =====
 
 ### Windows
+ 1. Download ready to use *.zip: https://github.com/h3tz/2b2t-Alarm/tree/master/Installations
+ 2. use it !
+ 
+ OR
+ 
  1. Unpack the archieve wherever you want
  2. Compile the project
  3. Copy *.wavs to resource folder used as alarms
