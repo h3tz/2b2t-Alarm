@@ -3,6 +3,7 @@
 A tool to sent an alarm on different channels when a specific position in 2b2t queue is reached. Channels are: Windows sound, prometheus, smartphone notification. Other will follow.
 
 v0.1. draft. Development will be continued.
+v0.2. add queue position to speeach
 #2b2t
 
 Features:
@@ -10,6 +11,7 @@ Features:
  - Shows the 2b2t queue position
  - Plays alarm when a specific queue position is reached
  - Prometheus client (to feed Grafana for example)
+ - Queue position to speeach
  
  Planed Features:
  =========
