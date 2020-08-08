@@ -36,9 +36,21 @@
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelToolState = new System.Windows.Forms.ToolStripStatusLabel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.Log = new System.Windows.Forms.TabPage();
+            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.clearDebug = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonOpenMLog = new System.Windows.Forms.ToolStripButton();
+            this.richTextBox_log = new System.Windows.Forms.RichTextBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.buttonQuality = new System.Windows.Forms.Button();
+            this.labelDateToConnect = new System.Windows.Forms.Label();
+            this.labelTimeToConnect = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.Options = new System.Windows.Forms.GroupBox();
             this.checkBoxPrometheus = new System.Windows.Forms.CheckBox();
             this.buttonPlayAlarm = new System.Windows.Forms.Button();
@@ -50,29 +62,18 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.richTextBox_log = new System.Windows.Forms.RichTextBox();
-            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.clearDebug = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonOpenMLog = new System.Windows.Forms.ToolStripButton();
-            this.Log = new System.Windows.Forms.TabPage();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabelToolState = new System.Windows.Forms.ToolStripStatusLabel();
-            this.labelTimeToConnect = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.labelDateToConnect = new System.Windows.Forms.Label();
-            this.buttonQuality = new System.Windows.Forms.Button();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.statusStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
+            this.Log.SuspendLayout();
+            this.toolStrip2.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.Options.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.toolStrip1.SuspendLayout();
-            this.toolStrip2.SuspendLayout();
-            this.Log.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // notifyIcon1
@@ -122,6 +123,18 @@
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(19, 25);
             this.toolStripStatusLabel1.Text = "-";
             // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(70, 25);
+            this.toolStripStatusLabel2.Text = "   State:";
+            // 
+            // toolStripStatusLabelToolState
+            // 
+            this.toolStripStatusLabelToolState.Name = "toolStripStatusLabelToolState";
+            this.toolStripStatusLabelToolState.Size = new System.Drawing.Size(19, 25);
+            this.toolStripStatusLabelToolState.Text = "-";
+            // 
             // tabControl1
             // 
             this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -134,6 +147,62 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1345, 220);
             this.tabControl1.TabIndex = 3;
+            // 
+            // Log
+            // 
+            this.Log.Controls.Add(this.toolStrip2);
+            this.Log.Controls.Add(this.richTextBox_log);
+            this.Log.Location = new System.Drawing.Point(4, 29);
+            this.Log.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Log.Name = "Log";
+            this.Log.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Log.Size = new System.Drawing.Size(1337, 187);
+            this.Log.TabIndex = 0;
+            this.Log.Text = "DebugLog";
+            this.Log.UseVisualStyleBackColor = true;
+            // 
+            // toolStrip2
+            // 
+            this.toolStrip2.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.clearDebug,
+            this.toolStripButtonOpenMLog});
+            this.toolStrip2.Location = new System.Drawing.Point(3, 2);
+            this.toolStrip2.Name = "toolStrip2";
+            this.toolStrip2.Size = new System.Drawing.Size(1331, 31);
+            this.toolStrip2.TabIndex = 1;
+            this.toolStrip2.Text = "toolStrip2";
+            // 
+            // clearDebug
+            // 
+            this.clearDebug.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.clearDebug.Image = global::_2B2TQueAlarm.Properties.Resources.textfield_delete;
+            this.clearDebug.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.clearDebug.Name = "clearDebug";
+            this.clearDebug.Size = new System.Drawing.Size(28, 28);
+            this.clearDebug.ToolTipText = "Clear Debug Log window";
+            this.clearDebug.Click += new System.EventHandler(this.clearDebug_Click);
+            // 
+            // toolStripButtonOpenMLog
+            // 
+            this.toolStripButtonOpenMLog.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonOpenMLog.Image = global::_2B2TQueAlarm.Properties.Resources.application_go;
+            this.toolStripButtonOpenMLog.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonOpenMLog.Name = "toolStripButtonOpenMLog";
+            this.toolStripButtonOpenMLog.Size = new System.Drawing.Size(28, 28);
+            this.toolStripButtonOpenMLog.Click += new System.EventHandler(this.toolStripButtonOpenMLog_Click);
+            // 
+            // richTextBox_log
+            // 
+            this.richTextBox_log.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.richTextBox_log.Location = new System.Drawing.Point(3, 44);
+            this.richTextBox_log.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.richTextBox_log.Name = "richTextBox_log";
+            this.richTextBox_log.Size = new System.Drawing.Size(1316, 129);
+            this.richTextBox_log.TabIndex = 0;
+            this.richTextBox_log.Text = "";
             // 
             // checkBox1
             // 
@@ -161,8 +230,70 @@
             this.panel1.Size = new System.Drawing.Size(1312, 924);
             this.panel1.TabIndex = 5;
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.buttonQuality);
+            this.groupBox2.Controls.Add(this.labelDateToConnect);
+            this.groupBox2.Controls.Add(this.labelTimeToConnect);
+            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.Location = new System.Drawing.Point(483, 582);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox2.Size = new System.Drawing.Size(781, 318);
+            this.groupBox2.TabIndex = 10;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Potential connection time";
+            // 
+            // buttonQuality
+            // 
+            this.buttonQuality.Location = new System.Drawing.Point(690, 277);
+            this.buttonQuality.Name = "buttonQuality";
+            this.buttonQuality.Size = new System.Drawing.Size(85, 32);
+            this.buttonQuality.TabIndex = 8;
+            this.buttonQuality.Text = "Quality";
+            this.buttonQuality.UseVisualStyleBackColor = true;
+            // 
+            // labelDateToConnect
+            // 
+            this.labelDateToConnect.AutoSize = true;
+            this.labelDateToConnect.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDateToConnect.Location = new System.Drawing.Point(248, 273);
+            this.labelDateToConnect.Name = "labelDateToConnect";
+            this.labelDateToConnect.Size = new System.Drawing.Size(24, 32);
+            this.labelDateToConnect.TabIndex = 7;
+            this.labelDateToConnect.Text = "-";
+            // 
+            // labelTimeToConnect
+            // 
+            this.labelTimeToConnect.AutoSize = true;
+            this.labelTimeToConnect.Font = new System.Drawing.Font("Microsoft Sans Serif", 90F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTimeToConnect.Location = new System.Drawing.Point(209, 50);
+            this.labelTimeToConnect.Name = "labelTimeToConnect";
+            this.labelTimeToConnect.Size = new System.Drawing.Size(145, 204);
+            this.labelTimeToConnect.TabIndex = 6;
+            this.labelTimeToConnect.Text = "-";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Location = new System.Drawing.Point(483, 40);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox1.Size = new System.Drawing.Size(781, 521);
+            this.groupBox1.TabIndex = 9;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Position in Queue";
+            // 
             // Options
             // 
+            this.Options.Controls.Add(this.checkBox4);
             this.Options.Controls.Add(this.checkBoxPrometheus);
             this.Options.Controls.Add(this.buttonPlayAlarm);
             this.Options.Controls.Add(this.Alarm);
@@ -296,143 +427,25 @@
             // closeToolStripMenuItem
             // 
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(210, 30);
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(139, 30);
             this.closeToolStripMenuItem.Text = "Close";
             this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
-            // 
-            // richTextBox_log
-            // 
-            this.richTextBox_log.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBox_log.Location = new System.Drawing.Point(3, 44);
-            this.richTextBox_log.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.richTextBox_log.Name = "richTextBox_log";
-            this.richTextBox_log.Size = new System.Drawing.Size(1316, 129);
-            this.richTextBox_log.TabIndex = 0;
-            this.richTextBox_log.Text = "";
-            // 
-            // toolStrip2
-            // 
-            this.toolStrip2.ImageScalingSize = new System.Drawing.Size(24, 24);
-            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.clearDebug,
-            this.toolStripButtonOpenMLog});
-            this.toolStrip2.Location = new System.Drawing.Point(3, 2);
-            this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(1331, 31);
-            this.toolStrip2.TabIndex = 1;
-            this.toolStrip2.Text = "toolStrip2";
-            // 
-            // clearDebug
-            // 
-            this.clearDebug.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.clearDebug.Image = global::_2B2TQueAlarm.Properties.Resources.textfield_delete;
-            this.clearDebug.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.clearDebug.Name = "clearDebug";
-            this.clearDebug.Size = new System.Drawing.Size(28, 28);
-            this.clearDebug.ToolTipText = "Clear Debug Log window";
-            this.clearDebug.Click += new System.EventHandler(this.clearDebug_Click);
-            // 
-            // toolStripButtonOpenMLog
-            // 
-            this.toolStripButtonOpenMLog.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonOpenMLog.Image = global::_2B2TQueAlarm.Properties.Resources.application_go;
-            this.toolStripButtonOpenMLog.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonOpenMLog.Name = "toolStripButtonOpenMLog";
-            this.toolStripButtonOpenMLog.Size = new System.Drawing.Size(28, 28);
-            this.toolStripButtonOpenMLog.Click += new System.EventHandler(this.toolStripButtonOpenMLog_Click);
-            // 
-            // Log
-            // 
-            this.Log.Controls.Add(this.toolStrip2);
-            this.Log.Controls.Add(this.richTextBox_log);
-            this.Log.Location = new System.Drawing.Point(4, 29);
-            this.Log.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Log.Name = "Log";
-            this.Log.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Log.Size = new System.Drawing.Size(1337, 187);
-            this.Log.TabIndex = 0;
-            this.Log.Text = "DebugLog";
-            this.Log.UseVisualStyleBackColor = true;
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 32);
             // 
-            // toolStripStatusLabel2
+            // checkBox4
             // 
-            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(70, 25);
-            this.toolStripStatusLabel2.Text = "   State:";
-            // 
-            // toolStripStatusLabelToolState
-            // 
-            this.toolStripStatusLabelToolState.Name = "toolStripStatusLabelToolState";
-            this.toolStripStatusLabelToolState.Size = new System.Drawing.Size(19, 25);
-            this.toolStripStatusLabelToolState.Text = "-";
-            // 
-            // labelTimeToConnect
-            // 
-            this.labelTimeToConnect.AutoSize = true;
-            this.labelTimeToConnect.Font = new System.Drawing.Font("Microsoft Sans Serif", 90F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTimeToConnect.Location = new System.Drawing.Point(209, 50);
-            this.labelTimeToConnect.Name = "labelTimeToConnect";
-            this.labelTimeToConnect.Size = new System.Drawing.Size(145, 204);
-            this.labelTimeToConnect.TabIndex = 6;
-            this.labelTimeToConnect.Text = "-";
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(483, 40);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox1.Size = new System.Drawing.Size(781, 521);
-            this.groupBox1.TabIndex = 9;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Position in Queue";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Controls.Add(this.buttonQuality);
-            this.groupBox2.Controls.Add(this.labelDateToConnect);
-            this.groupBox2.Controls.Add(this.labelTimeToConnect);
-            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(483, 582);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox2.Size = new System.Drawing.Size(781, 318);
-            this.groupBox2.TabIndex = 10;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Potential connection time";
-            // 
-            // labelDateToConnect
-            // 
-            this.labelDateToConnect.AutoSize = true;
-            this.labelDateToConnect.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDateToConnect.Location = new System.Drawing.Point(248, 273);
-            this.labelDateToConnect.Name = "labelDateToConnect";
-            this.labelDateToConnect.Size = new System.Drawing.Size(24, 32);
-            this.labelDateToConnect.TabIndex = 7;
-            this.labelDateToConnect.Text = "-";
-            // 
-            // buttonQuality
-            // 
-            this.buttonQuality.Location = new System.Drawing.Point(690, 277);
-            this.buttonQuality.Name = "buttonQuality";
-            this.buttonQuality.Size = new System.Drawing.Size(85, 32);
-            this.buttonQuality.TabIndex = 8;
-            this.buttonQuality.Text = "Quality";
-            this.buttonQuality.UseVisualStyleBackColor = true;
+            this.checkBox4.AutoSize = true;
+            this.checkBox4.Location = new System.Drawing.Point(26, 229);
+            this.checkBox4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(81, 24);
+            this.checkBox4.TabIndex = 12;
+            this.checkBox4.Text = "Speak";
+            this.checkBox4.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -452,20 +465,20 @@
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
+            this.Log.ResumeLayout(false);
+            this.Log.PerformLayout();
+            this.toolStrip2.ResumeLayout(false);
+            this.toolStrip2.PerformLayout();
             this.panel1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.Options.ResumeLayout(false);
             this.Options.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            this.toolStrip2.ResumeLayout(false);
-            this.toolStrip2.PerformLayout();
-            this.Log.ResumeLayout(false);
-            this.Log.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -506,6 +519,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label labelDateToConnect;
         private System.Windows.Forms.Button buttonQuality;
+        private System.Windows.Forms.CheckBox checkBox4;
     }
 }
 

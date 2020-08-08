@@ -15,6 +15,7 @@ using System.IO;
 using System.Linq;
 using System.Media;
 using System.Windows.Forms;
+using System.Speech.Synthesis;
 
 namespace _2B2TWinAlarm
 {
@@ -39,15 +40,20 @@ namespace _2B2TWinAlarm
 
         //private Gauge queuePos = Metrics.CreateGauge("2b2tQPos", "Position_in_2b2t_queue");
         private Gauge queuePos = Metrics.CreateGauge("twoBtwoT_queue_pos", "Position_in_2b2t_queue");
-
+        SpeechSynthesizer speaker = new SpeechSynthesizer();
 
         public Form1()
         {
             InitializeComponent();
             this.Text = "2B2TAlarm V" + System.Windows.Forms.Application.ProductVersion;
             this.buttonQuality.BackColor = Color.OrangeRed;
-            myWatch.Start();                        
-           
+            myWatch.Start();
+
+            speaker.SetOutputToDefaultAudioDevice();
+            speaker.Rate = 1;
+            speaker.Volume = 100;
+            speaker.SelectVoiceByHints(VoiceGender.Female, VoiceAge.Senior);
+
             try
             {
                 //init alarm field
@@ -173,6 +179,11 @@ namespace _2B2TWinAlarm
                             {
                                 queuePos.Set(double.Parse(curPos));
                             }
+
+                            if (checkBox4.Checked == true)
+                            {
+                                speaker.SpeakAsync(curPos);
+                            }
                         }
                     }
                 }
@@ -187,12 +198,9 @@ namespace _2B2TWinAlarm
             }
         }
 
-        private int lastMedian = 0;
         private Color getQualityOfPrediction()
         {
-            double allSpanTimeSum = 0;
             Color retcol = Color.Red;
-
             try
             {
                 if (currentPos > 5)
@@ -356,6 +364,7 @@ namespace _2B2TWinAlarm
             this.numericUpDown1.Text = Settings.Default.queuePos;
             this.checkBox1.Checked = Settings.Default.alarmcheckBox;
             this.checkBoxPrometheus.Checked = Settings.Default.prometheusCheckBox;
+            this.checkBox4.Checked = Settings.Default.speak;
 
             setToolState(toolState.notFechingPos);
         }
@@ -365,6 +374,7 @@ namespace _2B2TWinAlarm
             Settings.Default.queuePos = this.numericUpDown1.Text;
             Settings.Default.alarmcheckBox = this.checkBox1.Checked;
             Settings.Default.prometheusCheckBox = this.checkBoxPrometheus.Checked;
+            Settings.Default.speak = this.checkBox4.Checked;
             Settings.Default.Save();
         }
 
@@ -392,6 +402,11 @@ namespace _2B2TWinAlarm
             }
 
             this.toolStripStatusLabelToolState.Text = stateDesc;
+        }
+
+        private void checkBox4_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
