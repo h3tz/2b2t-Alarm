@@ -39,7 +39,7 @@ Usage
 Can not be used with Linux
 
 ## Prometheus
-
+Listen to local host 127.0.0.1:1234
 
 #### Troubleshooting
 In case you have problem, some exceptions will be fetched while the tool us running in the debug log window
