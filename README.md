@@ -12,6 +12,7 @@ Features:
  - Plays alarm when a specific queue position is reached
  - Prometheus client (to feed Grafana for example)
  - Queue position to speeach
+ - Prediction of potential connection time
  
  Planed Features:
  =========
