@@ -57,7 +57,7 @@ namespace _2B2TWinAlarm
             try
             {
                 //init alarm field
-                string directoryTocreate = Directory.GetCurrentDirectory() + "/resources";
+                string directoryTocreate = Directory.GetCurrentDirectory() + "/Resources";
                 if (!Directory.Exists(directoryTocreate))
                 {
                     Directory.CreateDirectory(directoryTocreate);
@@ -397,6 +397,9 @@ namespace _2B2TWinAlarm
                 case toolState.notFechingPos:
                     {
                         stateDesc = "doing nothing";
+                        this.labelTimeToConnect.Text = "";
+                        this.labelDateToConnect.Text = "";
+                        lastElaps.Clear();
                     }
                     break;
             }
