@@ -1,6 +1,6 @@
 [2b2t Alarm](https://github.com/h3tz/2b2t-Alarm)
 ===========
-A tool to sent an alarm on different channels when a specific position in 2b2t queue is reached. Channels are: Windows sound, prometheus, smartphone notification. Other will follow.
+A tool to sent an alarm on different channels when a specific position in 2b2t queue is reached. Channels are: Windows sound, prometheus, speak, smartphone notification. Other will follow.
 
 v0.1. draft. Development will be continued.
 v0.2. add queue position to speeach.
