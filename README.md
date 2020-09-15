@@ -1,9 +1,10 @@
-[2b2t-Alarm](https://github.com/h3tz/2b2t-Alarm)
+[2b2t Alarm](https://github.com/h3tz/2b2t-Alarm)
 ===========
-A tool to sent an alarm on different channels when a specific position in 2b2t queue is reached. Channels are: Windows sound, prometheus, smartphone notification. Other will follow.
+A tool to sent an alarm on different channels when a specific position in 2b2t queue is reached. Channels are: Windows sound, prometheus, speak, smartphone notification. Other will follow.
 
 v0.1. draft. Development will be continued.
-v0.2. add queue position to speeach
+v0.2. add queue position to speeach.
+v0.3. some fixes
 #2b2t
 
 Features:
@@ -12,6 +13,7 @@ Features:
  - Plays alarm when a specific queue position is reached
  - Prometheus client (to feed Grafana for example)
  - Queue position to speeach
+ - Prediction of potential connection time
  
  Planed Features:
  =========
@@ -39,7 +41,7 @@ Usage
 Can not be used with Linux
 
 ## Prometheus
-
+Listen to local host 127.0.0.1:1234
 
 #### Troubleshooting
 In case you have problem, some exceptions will be fetched while the tool us running in the debug log window
