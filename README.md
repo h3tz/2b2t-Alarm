@@ -1,19 +1,13 @@
 [2b2t Alarm](https://github.com/h3tz/2b2t-Alarm)
 ===========
-A tool to sent an alarm on different channels when a specific position in 2b2t queue is reached. Channels are: Windows sound, prometheus, speak, smartphone notification. Other will follow.
-
-v0.1. draft. Development will be continued.
-v0.2. add queue position to speeach.
-v0.3. some fixes
-#2b2t
-
+A tool to send an alarm on different channels when a specific position in 2b2t queue is reached. Channels are: Windows sound, Prometheus, speak, smartphone notification. The other will follow. To fetch the pos \.minecraft\logs\latest.log will be read.
+v0.1. draft. The development will be continued. v0.2. add queue position to speech. v0.3. some fixes #2b2t
 Features:
-=========
- - Shows the 2b2t queue position
- - Plays alarm when a specific queue position is reached
- - Prometheus client (to feed Grafana for example)
- - Queue position to speeach
- - Prediction of potential connection time
+- Shows the 2b2t queue position
+- Plays alarm when a specific queue position is reached
+- Prometheus client (to feed Grafana for example)
+- Queue position to speech
+- Prediction of potential connection time
  
  Planed Features:
  =========
