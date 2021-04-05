@@ -52,6 +52,7 @@
             this.labelTimeToConnect = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.Options = new System.Windows.Forms.GroupBox();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.checkBoxPrometheus = new System.Windows.Forms.CheckBox();
             this.buttonPlayAlarm = new System.Windows.Forms.Button();
             this.Alarm = new System.Windows.Forms.Label();
@@ -63,7 +64,7 @@
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.Log.SuspendLayout();
@@ -113,7 +114,7 @@
             this.toolStripStatusLabelToolState});
             this.statusStrip1.Location = new System.Drawing.Point(0, 1223);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1357, 30);
+            this.statusStrip1.Size = new System.Drawing.Size(1444, 30);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -145,7 +146,7 @@
             this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1345, 220);
+            this.tabControl1.Size = new System.Drawing.Size(1432, 220);
             this.tabControl1.TabIndex = 3;
             // 
             // Log
@@ -156,7 +157,7 @@
             this.Log.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Log.Name = "Log";
             this.Log.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Log.Size = new System.Drawing.Size(1337, 187);
+            this.Log.Size = new System.Drawing.Size(1424, 187);
             this.Log.TabIndex = 0;
             this.Log.Text = "DebugLog";
             this.Log.UseVisualStyleBackColor = true;
@@ -169,7 +170,7 @@
             this.toolStripButtonOpenMLog});
             this.toolStrip2.Location = new System.Drawing.Point(3, 2);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(1331, 31);
+            this.toolStrip2.Size = new System.Drawing.Size(1418, 31);
             this.toolStrip2.TabIndex = 1;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -190,6 +191,7 @@
             this.toolStripButtonOpenMLog.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonOpenMLog.Name = "toolStripButtonOpenMLog";
             this.toolStripButtonOpenMLog.Size = new System.Drawing.Size(28, 28);
+            this.toolStripButtonOpenMLog.ToolTipText = "Open minecraft .minecraft\\logs\\latest.log";
             this.toolStripButtonOpenMLog.Click += new System.EventHandler(this.toolStripButtonOpenMLog_Click);
             // 
             // richTextBox_log
@@ -200,7 +202,7 @@
             this.richTextBox_log.Location = new System.Drawing.Point(3, 44);
             this.richTextBox_log.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.richTextBox_log.Name = "richTextBox_log";
-            this.richTextBox_log.Size = new System.Drawing.Size(1316, 129);
+            this.richTextBox_log.Size = new System.Drawing.Size(1403, 129);
             this.richTextBox_log.TabIndex = 0;
             this.richTextBox_log.Text = "";
             // 
@@ -227,7 +229,7 @@
             this.panel1.Location = new System.Drawing.Point(12, 42);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1312, 924);
+            this.panel1.Size = new System.Drawing.Size(1399, 924);
             this.panel1.TabIndex = 5;
             // 
             // groupBox2
@@ -242,14 +244,14 @@
             this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox2.Size = new System.Drawing.Size(781, 318);
+            this.groupBox2.Size = new System.Drawing.Size(868, 318);
             this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Potential connection time";
             // 
             // buttonQuality
             // 
-            this.buttonQuality.Location = new System.Drawing.Point(690, 277);
+            this.buttonQuality.Location = new System.Drawing.Point(763, 273);
             this.buttonQuality.Name = "buttonQuality";
             this.buttonQuality.Size = new System.Drawing.Size(85, 32);
             this.buttonQuality.TabIndex = 8;
@@ -286,10 +288,10 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox1.Size = new System.Drawing.Size(781, 521);
+            this.groupBox1.Size = new System.Drawing.Size(868, 521);
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Position in Queue";
+            this.groupBox1.Text = "Position in queue";
             // 
             // Options
             // 
@@ -310,6 +312,17 @@
             this.Options.TabIndex = 5;
             this.Options.TabStop = false;
             this.Options.Text = "Options";
+            // 
+            // checkBox4
+            // 
+            this.checkBox4.AutoSize = true;
+            this.checkBox4.Location = new System.Drawing.Point(26, 162);
+            this.checkBox4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(81, 24);
+            this.checkBox4.TabIndex = 12;
+            this.checkBox4.Text = "Speak";
+            this.checkBox4.UseVisualStyleBackColor = true;
             // 
             // checkBoxPrometheus
             // 
@@ -358,7 +371,7 @@
             // 
             this.checkBox3.AutoSize = true;
             this.checkBox3.Enabled = false;
-            this.checkBox3.Location = new System.Drawing.Point(26, 165);
+            this.checkBox3.Location = new System.Drawing.Point(26, 190);
             this.checkBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkBox3.Name = "checkBox3";
             this.checkBox3.Size = new System.Drawing.Size(230, 24);
@@ -370,7 +383,7 @@
             // 
             this.checkBox2.AutoSize = true;
             this.checkBox2.Enabled = false;
-            this.checkBox2.Location = new System.Drawing.Point(26, 196);
+            this.checkBox2.Location = new System.Drawing.Point(26, 218);
             this.checkBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(239, 24);
@@ -409,7 +422,7 @@
             this.toolStripSeparator1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1357, 32);
+            this.toolStrip1.Size = new System.Drawing.Size(1444, 32);
             this.toolStrip1.TabIndex = 6;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -417,7 +430,8 @@
             // 
             this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.closeToolStripMenuItem});
+            this.closeToolStripMenuItem,
+            this.aboutToolStripMenuItem});
             this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
             this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
@@ -427,7 +441,7 @@
             // closeToolStripMenuItem
             // 
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(139, 30);
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(210, 30);
             this.closeToolStripMenuItem.Text = "Close";
             this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
             // 
@@ -436,22 +450,17 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 32);
             // 
-            // checkBox4
+            // aboutToolStripMenuItem
             // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(26, 229);
-            this.checkBox4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(81, 24);
-            this.checkBox4.TabIndex = 12;
-            this.checkBox4.Text = "Speak";
-            this.checkBox4.UseVisualStyleBackColor = true;
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(210, 30);
+            this.aboutToolStripMenuItem.Text = "About";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1357, 1253);
+            this.ClientSize = new System.Drawing.Size(1444, 1253);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tabControl1);
@@ -520,6 +529,7 @@
         private System.Windows.Forms.Label labelDateToConnect;
         private System.Windows.Forms.Button buttonQuality;
         private System.Windows.Forms.CheckBox checkBox4;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
     }
 }
 

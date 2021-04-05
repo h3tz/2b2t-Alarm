@@ -1,6 +1,6 @@
 ﻿/**
  * @file Form1.cs, the main script
- * @version 0.1.0
+ * @version 0.1.1
  * @license MIT
  * @see {@link https://github.com/h3tz/2b2t-Alarm|Website }
  */
@@ -38,7 +38,6 @@ namespace _2B2TWinAlarm
         private int medianCounter = 0;
         public int currentPos = 0;
 
-        //private Gauge queuePos = Metrics.CreateGauge("2b2tQPos", "Position_in_2b2t_queue");
         private Gauge queuePos = Metrics.CreateGauge("twoBtwoT_queue_pos", "Position_in_2b2t_queue");
         SpeechSynthesizer speaker = new SpeechSynthesizer();
 
@@ -78,7 +77,7 @@ namespace _2B2TWinAlarm
                 }
                 else
                 {
-                    throw new System.ArgumentException("The ressource folder next to *.exe does not contain *.wav. Please copy at least one *.wav into the resource directory.");
+                    throw new System.ArgumentException("The ressource folder " + directoryTocreate + " does not contain *.wav. Please copy at least one *.wav into the resource directory.");
                 }
             }
             catch(Exception ex)
@@ -88,10 +87,7 @@ namespace _2B2TWinAlarm
 
                 // Displays the MessageBox.
                 result = MessageBox.Show(ex.Message, "2b2t Alarm startup error", buttons);
-                //if (result == System.Windows.Forms.DialogResult.Yes)
-                //{
                 this.Close();
-                //}
             }
         }
 
@@ -240,7 +236,7 @@ namespace _2B2TWinAlarm
             }
             catch (Exception ex)
             {
-
+                AppendText(this.richTextBox_log, "ERROR: " + ex.Message, Color.Red);
             }
 
             return Color.Green;
@@ -405,11 +401,6 @@ namespace _2B2TWinAlarm
             }
 
             this.toolStripStatusLabelToolState.Text = stateDesc;
-        }
-
-        private void checkBox4_CheckedChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }
