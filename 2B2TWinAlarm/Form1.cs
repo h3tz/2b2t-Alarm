@@ -1,6 +1,6 @@
 ﻿/**
  * @file Form1.cs, the main script
- * @version 0.1.1
+ * @version 1.2
  * @license MIT
  * @see {@link https://github.com/h3tz/2b2t-Alarm|Website }
  */
@@ -33,8 +33,8 @@ namespace _2B2TWinAlarm
         private List<TimeSpan> lastElaps = new List<TimeSpan>();
         private List<string> allAlarms = new List<string>();
         private int defaultPos = 0;
-        private string mLogFilePath = @"\.minecraft\logs\latest.log";
-        private string pahtToLogFileD = string.Empty;
+        private string mLogFilePath = @"\.minecraft\launcher_log.txt";    //@"\.minecraft\logs\latest.log";
+        private string pahtToLogFileD = @"\.minecraft\launcher_log.txt";
         private int medianCounter = 0;
         public int currentPos = 0;
 
@@ -51,7 +51,7 @@ namespace _2B2TWinAlarm
             speaker.SetOutputToDefaultAudioDevice();
             speaker.Rate = 1;
             speaker.Volume = 100;
-            speaker.SelectVoiceByHints(VoiceGender.Female, VoiceAge.Senior);
+            speaker.SelectVoiceByHints(VoiceGender.Female, VoiceAge.Adult);
 
             try
             {
@@ -134,63 +134,77 @@ namespace _2B2TWinAlarm
         {
             try
             {
-                string curPos = e.Result.ToString();
-                this.label1.Text = curPos;
-                this.label1.Update();
-                toolStripStatusLabel1.Text = "Update: " + DateTime.Now.ToLongTimeString();
-
-                MetricServer server;
-                if ((checkBoxPrometheus.Checked == true) && (prometheusServerRunning == false))
-                {
-                    server = new MetricServer(hostname: "localhost", port: 1234);
-                    server.Start();
-                    prometheusServerRunning = true;
-                }
-
-                if (curPos != defaultPos.ToString())
-                {
-                    if (lastPos != curPos)
+                if (e.Result != null)
+                {                
+                    string curPos = e.Result.ToString();
+                    int result;
+                    if (int.TryParse(curPos, out result))
                     {
-                        if (myWatch.Elapsed.TotalSeconds > 2)
-                        {
-                            lastElaps.Add(myWatch.Elapsed);
-                            myWatch.Stop();
-                            lastPos = curPos;
-                            
-                            AppendText(this.richTextBox_log, "Update: " + DateTime.Now.ToShortTimeString() + "|Pos: " + curPos + "|took: " + lastElaps[lastElaps.Count - 1].TotalSeconds.ToString() + " - sec from pos: " + ((int.Parse(curPos)) + 1).ToString() + "|Median: " + medianTime().ToString() + "|estimated connection time: " + getPotentialFinaTime("MM/dd/yyyy HH:mm").ToString() + " \n", Color.Black);
-                            myWatch.Restart();
-                            this.buttonQuality.BackColor = getQualityOfPrediction();
-                            this.labelTimeToConnect.Text = getPotentialFinaTime("HH:mm");
-                            this.labelDateToConnect.Text = getPotentialFinaTime("MM/dd/yyyy");
+                        this.label1.Text = curPos;
+                        this.label1.Update();
+                    }
+                    else
+                    {
+                        this.label1.Text = "-";
+                        this.label1.Update();
+                    }
+                    toolStripStatusLabel1.Text = "Update: " + DateTime.Now.ToLongTimeString();
 
-                            if (int.Parse(curPos) <= numericUpDown1.Value)
+                    MetricServer server;
+                    if ((checkBoxPrometheus.Checked == true) && (prometheusServerRunning == false))
+                    {
+                        server = new MetricServer(hostname: "localhost", port: 1234);
+                        server.Start();
+                        prometheusServerRunning = true;
+                    }
+
+                    if (int.TryParse(curPos, out result))
+                    {
+                        if (lastPos != curPos)
+                        {
+                            lastPos = curPos;
+                            if (myWatch.Elapsed.TotalSeconds > 2)
                             {
-                                if (checkBox1.Checked == true)
+                                lastElaps.Add(myWatch.Elapsed);
+                                myWatch.Stop();
+                                lastPos = curPos;
+
+                                AppendText(this.richTextBox_log, "Update: " + DateTime.Now.ToShortTimeString() + "|Pos: " + curPos + "|took: " + lastElaps[lastElaps.Count - 1].TotalSeconds.ToString() + " - sec from pos: " + ((int.Parse(curPos)) + 1).ToString() + "|Median: " + medianTime().ToString() + "|estimated connection time: " + getPotentialFinaTime("MM/dd/yyyy HH:mm").ToString(), Color.Black);
+                                myWatch.Restart();
+                                this.buttonQuality.BackColor = getQualityOfPrediction();
+                                this.labelTimeToConnect.Text = getPotentialFinaTime("HH:mm");
+                                this.labelDateToConnect.Text = getPotentialFinaTime("MM/dd/yyyy");
+
+                                if (int.Parse(curPos) <= numericUpDown1.Value)
                                 {
-                                    playAlarm();
+                                    if (checkBox1.Checked == true)
+                                    {
+                                        playAlarm();
+                                    }
+                                }
+
+                                if (checkBoxPrometheus.Checked == true)
+                                {
+                                    queuePos.Set(double.Parse(curPos));
+                                }
+
+                                if (checkBox4.Checked == true)
+                                {
+                                    speaker.SpeakAsync(curPos);
                                 }
                             }
-
-                            if (checkBoxPrometheus.Checked == true)
-                            {
-                                queuePos.Set(double.Parse(curPos));
-                            }
-
-                            if (checkBox4.Checked == true)
-                            {
-                                speaker.SpeakAsync(curPos);
-                            }
                         }
+                        
                     }
-                }
-                else
-                {
-                    AppendText(this.richTextBox_log, "Info: " + " Your are not trying to connect to 2b2t.org minecraft server", Color.Red);
+                    else
+                    {
+                        AppendText(this.richTextBox_log, "Info: " + " Your are not trying to connect to 2b2t.org minecraft server", Color.Red);
+                    }
                 }
             }
             catch (Exception ex)
             {
-                AppendText(this.richTextBox_log, "ERROR: " + ex.Message, Color.Red);
+//AppendText(this.richTextBox_log, "ERROR: " + ex.Message, Color.Red);
             }
         }
 
@@ -236,7 +250,7 @@ namespace _2B2TWinAlarm
             }
             catch (Exception ex)
             {
-                AppendText(this.richTextBox_log, "ERROR: " + ex.Message, Color.Red);
+                //AppendText(this.richTextBox_log, "ERROR: " + ex.Message, Color.Red);
             }
 
             return Color.Green;
@@ -247,7 +261,7 @@ namespace _2B2TWinAlarm
         /// </summary>
         /// <param name="pahtToLogFileDir">path to latest.log</param>
         /// <returns>queue position</returns>
-        public int getCurrentPos(string pahtToLogFileDir)
+        public string getCurrentPos(string pahtToLogFileDir)
         {
             int quePos = defaultPos;
             var filestream = new System.IO.FileStream(pahtToLogFileDir,
@@ -256,6 +270,7 @@ namespace _2B2TWinAlarm
                                                       System.IO.FileShare.ReadWrite);
             var file = new System.IO.StreamReader(filestream, System.Text.Encoding.UTF8, true, 128);
             string lastLine = string.Empty;
+            String[] myNewString = new string[5];
             string currentLine = string.Empty;
             while ((currentLine = file.ReadLine()) != null)
             {
@@ -264,7 +279,11 @@ namespace _2B2TWinAlarm
             if (lastLine.Contains("Position in queue"))
             {
                 String[] split = lastLine.Split(':');
-                quePos = int.Parse(split[split.Length - 1]);
+                quePos = split.Length - 1;
+                lastLine = split[quePos];
+                myNewString = lastLine.Split('\\');
+                lastLine = myNewString[0].Replace(" ","");
+
                 setToolState(toolState.fetchingPos);
             }
             else if (lastLine.Contains("restarting"))
@@ -275,8 +294,8 @@ namespace _2B2TWinAlarm
             {
                 setToolState(toolState.notFechingPos);
             }
-            this.currentPos = quePos;
-            return quePos;
+            this.currentPos = int.Parse(lastLine);
+            return lastLine;
         }
 
         /// <summary>
@@ -287,12 +306,19 @@ namespace _2B2TWinAlarm
         /// <param name="color">text color</param>
         private void AppendText(RichTextBox box, string text, Color color)
         {
-            box.SelectionStart = box.TextLength;
-            box.SelectionLength = 0;
+            try
+            {
+                box.SelectionStart = box.TextLength;
+                box.SelectionLength = 0;
 
-            box.SelectionColor = color;
-            box.AppendText(DateTime.Now +": " + text + "\n");
-            box.SelectionColor = box.ForeColor;
+                box.SelectionColor = color;
+                box.AppendText(DateTime.Now + ": " + text + "\n");
+                box.SelectionColor = box.ForeColor;
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
 
         private double medianTime()

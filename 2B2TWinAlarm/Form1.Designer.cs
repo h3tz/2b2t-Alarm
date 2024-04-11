@@ -64,7 +64,6 @@
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.Log.SuspendLayout();
@@ -89,7 +88,7 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 150F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(186, 90);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(243, 340);
+            this.label1.Size = new System.Drawing.Size(242, 340);
             this.label1.TabIndex = 1;
             this.label1.Text = "-";
             // 
@@ -112,9 +111,9 @@
             this.toolStripStatusLabel1,
             this.toolStripStatusLabel2,
             this.toolStripStatusLabelToolState});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 1223);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 1221);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1444, 30);
+            this.statusStrip1.Size = new System.Drawing.Size(1444, 32);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -170,7 +169,7 @@
             this.toolStripButtonOpenMLog});
             this.toolStrip2.Location = new System.Drawing.Point(3, 2);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(1418, 31);
+            this.toolStrip2.Size = new System.Drawing.Size(1418, 33);
             this.toolStrip2.TabIndex = 1;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -180,7 +179,7 @@
             this.clearDebug.Image = global::_2B2TQueAlarm.Properties.Resources.textfield_delete;
             this.clearDebug.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.clearDebug.Name = "clearDebug";
-            this.clearDebug.Size = new System.Drawing.Size(28, 28);
+            this.clearDebug.Size = new System.Drawing.Size(34, 28);
             this.clearDebug.ToolTipText = "Clear Debug Log window";
             this.clearDebug.Click += new System.EventHandler(this.clearDebug_Click);
             // 
@@ -190,7 +189,7 @@
             this.toolStripButtonOpenMLog.Image = global::_2B2TQueAlarm.Properties.Resources.application_go;
             this.toolStripButtonOpenMLog.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonOpenMLog.Name = "toolStripButtonOpenMLog";
-            this.toolStripButtonOpenMLog.Size = new System.Drawing.Size(28, 28);
+            this.toolStripButtonOpenMLog.Size = new System.Drawing.Size(34, 28);
             this.toolStripButtonOpenMLog.ToolTipText = "Open minecraft .minecraft\\logs\\latest.log";
             this.toolStripButtonOpenMLog.Click += new System.EventHandler(this.toolStripButtonOpenMLog_Click);
             // 
@@ -264,7 +263,7 @@
             this.labelDateToConnect.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelDateToConnect.Location = new System.Drawing.Point(248, 273);
             this.labelDateToConnect.Name = "labelDateToConnect";
-            this.labelDateToConnect.Size = new System.Drawing.Size(24, 32);
+            this.labelDateToConnect.Size = new System.Drawing.Size(23, 32);
             this.labelDateToConnect.TabIndex = 7;
             this.labelDateToConnect.Text = "-";
             // 
@@ -422,7 +421,7 @@
             this.toolStripSeparator1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1444, 32);
+            this.toolStrip1.Size = new System.Drawing.Size(1444, 34);
             this.toolStrip1.TabIndex = 6;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -430,8 +429,7 @@
             // 
             this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.closeToolStripMenuItem,
-            this.aboutToolStripMenuItem});
+            this.closeToolStripMenuItem});
             this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
             this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
@@ -441,20 +439,14 @@
             // closeToolStripMenuItem
             // 
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(210, 30);
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.closeToolStripMenuItem.Text = "Close";
             this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 32);
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(210, 30);
-            this.aboutToolStripMenuItem.Text = "About";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 34);
             // 
             // Form1
             // 
@@ -529,7 +521,6 @@
         private System.Windows.Forms.Label labelDateToConnect;
         private System.Windows.Forms.Button buttonQuality;
         private System.Windows.Forms.CheckBox checkBox4;
-        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
     }
 }
 

@@ -2,6 +2,7 @@
 ===========
 A windows tool to sent an alarm on different channels when a specific position in 2b2t queue is reached.
 
+v1.2. update to \.minecraft\launcher_log.txt instead of \.minecraft\launcher_log.txt
 v0.1. draft. Development will be continued.
 
 Features:
